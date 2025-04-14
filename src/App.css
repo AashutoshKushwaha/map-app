@@ -1,5 +1,86 @@
 .App {
-  text-align: center;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.sidebar {
+  overflow: hidden;
+}
+
+.sidebar.open {
+  width: 300px;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Reduced gap between panels */
+}
+
+.panel {
+  border-bottom: 1px solid #ddd;
+}
+
+.panel-content {
+  padding: 10px;
+  background: #f9f9f9; /* Light background for forms */
+  border-radius: 4px;
+  margin-bottom: 10px; /* Space between forms */
+  transition: max-height 0.3s ease, opacity 0.3s ease; /* Smooth expand/collapse */
+}
+
+/* Style inputs and buttons consistently */
+input,
+button {
+  margin: 5px 0;
+  padding: 8px;
+  width: calc(100% - 16px);
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.sidebar-toggle {
+  font-size: 16px;
+}
+
+/* Adjust map to account for sidebar */
+.leaflet-container {
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.open ~ .leaflet-container {
+  margin-left: 310px; /* Sidebar width (300px) + padding (10px) */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .sidebar.open {
+    width: 100%;
+    left: 0;
+  }
+  .sidebar.open ~ .leaflet-container {
+    margin-left: 0;
+  }
+  .sidebar-toggle {
+    left: 5px;
+  }
 }
 
 .App-logo {
